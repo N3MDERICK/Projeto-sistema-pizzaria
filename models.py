@@ -29,3 +29,4 @@ class Pedido(db.Model):
 
     # RELACIONAMENTO N PRA N ENTRE PEDIDO E PIZZA
     pizzas = db.relationship("Pizza", secondary=pedido_pizza, backref="pedidos")
+#NAO SEI DIREITO O QUE TO FAZENDO TAMO FUDIDO
