@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Pedidos</h2>
+
+<!-- Formulário para novo pedido -->
+<form action="{{ url_for('add_pedido') }}" method="post">
+  Cliente:
+  <select name="cliente_id" required>
+    {% for c in Cliente.query.all() %}
+      <option value="{{ c.id }}">{{ c.nome }}</option>
+    {% endfor %}
+  </select>
+
+  <br>Pizzas:
+  <br>
+  {% for p in Pizza.query.all() %}
+    <input type="checkbox" name="pizzas" value="{{ p.id }}"> {{ p.sabor }} <br>
+  {% endfor %}
+
+  <button type="submit">Fazer Pedido</button>
+</form>
+
+<hr>
+
+<!-- Lista de pedidos -->
+<ul>
+{% for ped in pedidos %}
+  <li>
+    Pedido #{{ ped.id }} - Cliente: {{ ped.cliente.nome }} - Status: {{ ped.status }}
+    <br> Pizzas: 
+    {% for pizza in ped.pizzas %}
+      {{ pizza.sabor }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+
+    <!-- Formulário para atualizar status -->
+    <form action="{{ url_for('update_pedido', id=ped.id) }}" method="post">
+      <select name="status">
+        <option value="Em preparo" {% if ped.status=="Em preparo" %}selected{% endif %}>Em preparo</option>
+        <option value="Saiu para entrega" {% if ped.status=="Saiu para entrega" %}selected{% endif %}>Saiu para entrega</option>
+        <option value="Entregue" {% if ped.status=="Entregue" %}selected{% endif %}>Entregue</option>
+      </select>
+      <button type="submit">Atualizar</button>
+    </form>
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

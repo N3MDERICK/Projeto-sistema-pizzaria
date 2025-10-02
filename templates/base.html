@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Pizzaria</title>
+</head>
+<body>
+  <h1>Pizzaria</h1>
+  <nav>
+    <a href="{{ url_for('index') }}">Início</a> |
+    <a href="{{ url_for('clientes') }}">Clientes</a> |
+    <a href="{{ url_for('pizzas') }}">Pizzas</a> |
+    <a href="{{ url_for('pedidos') }}">Pedidos</a> |
+    <a href="{{ url_for('relatorios') }}">Relatórios</a>
+  </nav>
+  <hr>
+  
+  {% block content %}{% endblock %}
+</body>
+</html>

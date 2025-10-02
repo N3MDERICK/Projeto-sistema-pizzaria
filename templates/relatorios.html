@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Relatórios</h2>
+
+<p><strong>Total de pedidos:</strong> {{ total }}</p>
+
+<h3>Pedidos por status</h3>
+<ul>
+{% for status, qtd in status_counts %}
+  <li>{{ status }}: {{ qtd }}</li>
+{% endfor %}
+</ul>
+
+<h3>Pizza mais pedida</h3>
+{% if pizza_mais %}
+  <p>{{ pizza_mais[0] }} — {{ pizza_mais[1] }} pedidos</p>
+{% else %}
+  <p>Ainda não há pedidos.</p>
+{% endif %}
+{% endblock %}
